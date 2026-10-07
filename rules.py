@@ -2,7 +2,7 @@ def valid_move(board, orientation, row, col):
     """Return True only for an unused line inside the board."""
     if orientation not in {"H", "V"}:
         return False
-    if not isinstance(row, int) or not isinstance(col, int):
+    if type(row) is not int or type(col) is not int:
         return False
 
     if orientation == "H":

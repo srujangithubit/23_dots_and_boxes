@@ -92,6 +92,26 @@ class TestDotsAndBoxes(unittest.TestCase):
     def test_parse_move_normalizes_valid_input(self):
         self.assertEqual(parse_move(" h 1 0 "), ("H", 1, 0))
 
+    def test_custom_dimensions_are_applied(self):
+        game = DotsAndBoxes(rows=3, cols=1)
+        self.assertEqual(game.board.total_lines(), 10)
+        self.assertTrue(game.play_move("H", 3, 0)["valid"])
+        self.assertFalse(game.play_move("V", 3, 0)["valid"])
+
+    def test_invalid_direct_types_do_not_mutate_state(self):
+        game = DotsAndBoxes()
+        result = game.play_move("H", True, 0)
+        self.assertFalse(result["valid"])
+        self.assertEqual(result["reason"], "invalid_move")
+        self.assertEqual(game.board.line_count(), 0)
+        self.assertEqual(game.scores, [0, 0])
+
+    def test_play_move_accepts_lowercase_orientation(self):
+        game = DotsAndBoxes()
+        result = game.play_move("h", 0, 0)
+        self.assertTrue(result["valid"])
+        self.assertTrue(game.board.horizontal[0][0])
+
 
 if __name__ == "__main__":
     unittest.main()

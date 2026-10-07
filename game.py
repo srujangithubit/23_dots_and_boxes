@@ -15,6 +15,9 @@ class DotsAndBoxes:
         self.finished = False
 
     def play_move(self, orientation, row, col):
+        if isinstance(orientation, str):
+            orientation = orientation.upper()
+
         if self.finished or self.board.is_complete():
             self.finished = True
             return {"valid": False, "reason": "game_over", "completed": 0}

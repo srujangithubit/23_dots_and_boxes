@@ -36,6 +36,7 @@ Custom player names were also added so the configured game is easier to follow d
 The program safely rejects:
 - malformed commands;
 - non-numeric or negative coordinates;
+- non-integer coordinate types passed into the game API;
 - invalid orientations;
 - coordinates outside the selected board;
 - repeated lines;
@@ -56,6 +57,7 @@ The interactive loop also supports `Q` to end a game cleanly.
 - post-game move rejection;
 - malformed commands;
 - invalid coordinates/orientation;
+- custom board dimensions;
 - move parsing.
 
 ## Run the game
