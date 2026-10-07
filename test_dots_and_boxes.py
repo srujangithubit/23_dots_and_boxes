@@ -80,6 +80,26 @@ class TestDotsAndBoxes(unittest.TestCase):
         self.assertTrue(game.play_move("H", 3, 0)["valid"])
         self.assertFalse(game.play_move("V", 3, 0)["valid"])
 
+    def test_one_move_can_complete_two_boxes(self):
+        game = DotsAndBoxes(rows=1, cols=2)
+        for move in [
+            ("H", 0, 0),
+            ("H", 0, 1),
+            ("H", 1, 0),
+            ("H", 1, 1),
+            ("V", 0, 0),
+            ("V", 0, 2),
+        ]:
+            game.play_move(*move)
+
+        result = game.play_move("V", 0, 1)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["completed"], 2)
+        self.assertTrue(result["extra_turn"])
+        self.assertTrue(result["game_over"])
+        self.assertEqual(game.scores, [2, 0])
+        self.assertEqual(game.current, 0)
+
     def test_invalid_direct_types_do_not_mutate_state(self):
         game = DotsAndBoxes()
         result = game.play_move("H", True, 0)

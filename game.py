@@ -38,7 +38,7 @@ class DotsAndBoxes:
             "valid": True,
             "reason": "ok",
             "completed": count,
-            "extra_turn": count > 0 and not self.finished,
+            "extra_turn": count > 0,
             "game_over": self.finished,
         }
 
