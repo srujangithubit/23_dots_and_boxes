@@ -85,7 +85,7 @@ No third-party dependencies are required.
 
 ## Video checklist
 
-**Before changes:** capture a 10-second clip showing the starter game's incorrect score/turn behaviour when a box is completed.
+**Before changes:** capture a 10-second clip of the original starter project before applying these changes. The visible starter code already appears to retain the same player after a completed box, so do not fabricate a broken state; capture the actual baseline behaviour from your local copy and describe the observed issue during review.
 
 **After changes:** capture a 10-second clip showing a box being scored, the same player receiving the extra turn, and the new configurable board size/name setup.
 
