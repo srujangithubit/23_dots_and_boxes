@@ -42,6 +42,24 @@ class TestDotsAndBoxes(unittest.TestCase):
         self.assertEqual(game.scores, [0, 1])
         self.assertEqual(game.current, 1)
 
+    def test_one_move_can_complete_two_boxes(self):
+        game = DotsAndBoxes(rows=1, cols=2)
+
+        setup = [
+            ("H", 0, 0), ("H", 0, 1),
+            ("H", 1, 0), ("H", 1, 1),
+            ("V", 0, 0), ("V", 0, 2),
+        ]
+        for move in setup:
+            game.play_move(*move)
+
+        result = game.play_move("V", 0, 1)
+
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["completed"], 2)
+        self.assertEqual(game.scores[game.current], 2)
+        self.assertTrue(result["extra_turn"])
+
     def test_end_of_game_condition_and_post_game_rejection(self):
         game = DotsAndBoxes(rows=1, cols=1)
         for move in [("H", 0, 0), ("H", 1, 0), ("V", 0, 0), ("V", 0, 1)]:
